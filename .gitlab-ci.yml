@@ -1,0 +1,21 @@
+image: "node:10.15.0-alpine"
+
+before_script:
+  - apk update
+  - apk add make
+  - make ci-web-prelude
+
+build:
+  stage: build
+  script:
+    - make web-build
+
+tslint:
+  stage: test
+  script:
+    - make web-lint
+
+test:
+  stage: test
+  script:
+    - make web-test
